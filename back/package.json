@@ -1,0 +1,21 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start-frontend": "cd ../front&& npm start",
+    "dev": "concurrently \"npm start\" \"npm run start-frontend\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
