@@ -29,14 +29,37 @@ const Usuarios_index = () => {
     if (error) return <div>Erro: {error}</div>;
 
     return (
-        <div>
-            <h1>Usuários</h1>
-            <ul>
-                {usuarios.map(usuario => (
-                    <li key={usuario.id}>{usuario.nome} - {usuario.idade}</li>
-                ))}
-            </ul>
+
+        <div className="overflow-x-auto">
+            <h1 className="text-2xl font-bold mb-4">Usuários</h1>
+
+            <div className="min-w-full">
+                <table className="table-auto w-full text-left">
+                    <thead className="bg-gray-200">
+                    <tr>
+                        <th scope="col" className="px-6 py-3">ID</th>
+                        <th scope="col" className="px-6 py-3">Nome</th>
+                        <th scope="col" className="px-6 py-3">Idade</th>
+                        <th scope="col" className="px-6 py-3">Gênero</th>
+                        <th scope="col" className="px-6 py-3">Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {usuarios.map(usuario => (
+                        <tr key={usuario.id} className="border-b">
+                            <th scope="row" className="px-6 py-4">{usuario.id}</th>
+                            <td className="px-6 py-4">{usuario.nome}</td>
+                            <td className="px-6 py-4">{usuario.idade}</td>
+                            <td className="px-6 py-4">{usuario.genero}</td>
+                            <td className="px-6 py-4">{usuario.email}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+
     );
 }
 
