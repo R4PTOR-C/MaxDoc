@@ -31,12 +31,33 @@ const Usuarios_index = () => {
     return (
         <div>
             <h1>Usuários</h1>
-            <ul>
+
+            <table className="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Idade</th>
+                    <th scope="col">Genero</th>
+                    <th scope="col">Email</th>
+                </tr>
+                </thead>
+                <tbody>
                 {usuarios.map(usuario => (
-                    <li key={usuario.id}>{usuario.nome} - {usuario.idade}</li>
+                    <tr key={usuario.id}>
+                        <th scope="row">{usuario.id}</th>
+                        <td>{usuario.nome}</td>
+                        <td>{usuario.idade}</td>
+                        <td>{usuario.genero}</td>
+                        <td>{usuario.email}</td>
+
+                    </tr>
                 ))}
-            </ul>
+                </tbody>
+            </table>
         </div>
+
+
     );
 }
 
