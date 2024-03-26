@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-// Substitua BASE_URL pela URL do seu backend
-const BASE_URL = 'https://maxdoc-front.onrender.com/';
-
 function Usuarios_new() {
     const [nome, setNome] = useState('');
     const [idade, setIdade] = useState('');
@@ -14,7 +11,7 @@ function Usuarios_new() {
         const usuario = { nome, idade, genero, email };
 
         try {
-            const response = await fetch(`${BASE_URL}/usuarios`, {
+            const response = await fetch(`https://maxdoc.onrender.com/usuarios`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
