@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Roboto:wght@900&display=swap');
+
+/* LoginPage.css */
+.login-page {
+    display: flex;
+    min-height: 100vh;
+}
+
+.welcome-section {
+    flex: 1;
+    background: #b82f27;
+    padding: 50px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-section {
+    flex: 1;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 300px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.login-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-input {
+    margin-bottom: 15px;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    background: #e6e6e6;
+}
+
+.login-input:focus {
+    outline: none;
+}
+
+.login-remember {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.login-btn {
+    background: #b82f27;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.login-btn:focus {
+    outline: none;
+}
+
+.login-btn:hover {
+    background: #b82f27;
+}
+
+/* No seu arquivo CSS */
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-container img {
+    margin: 0 10px;
+}
+
+.logo-image{
+    width: 100px; /* Exemplo para tamanho padrão da imagem do logo */
+    height: auto;
+}
+
+.logo-text{
+    font-size: 100px;
+}
+
+@media (max-width: 768px) {
+    .logo-image{
+        width: 50px; /* Exemplo para tamanho padrão da imagem do logo */
+        height: auto;
+    }
+
+    .logo-text{
+        font-size: 50px;
+    }
+
+    .login-page {
+        flex-direction: column; /* Empilha os itens verticalmente */
+    }
+
+    .welcome-section, .login-section {
+        width: 100%; /* Cada seção ocupa a largura inteira */
+        padding: 20px; /* Adiciona algum espaçamento */
+        text-align: center; /* Centraliza o texto para seções estreitas */
+    }
+
+    .login-container {
+        /* Reduz o tamanho do container de login ou ajusta o padding conforme necessário */
+        width: 90%;
+        margin-top: 20px; /* Adiciona espaço acima do formulário de login */
+    }
+
+    /* Se você quiser ocultar elementos que não fazem sentido em telas menores, pode fazer assim */
+    .some-element {
+        display: none;
+    }
+}
