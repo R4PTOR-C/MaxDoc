@@ -92,6 +92,7 @@
 }
 
 .logo-text{
+    font-family: Play;
     font-size: 100px;
 }
 
@@ -102,6 +103,7 @@
     }
 
     .logo-text{
+        font-family: Play;
         font-size: 50px;
     }
 
