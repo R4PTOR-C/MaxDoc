@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('./db');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001; // Render vai fornecer a PORT
 const cors = require('cors');
 app.use(cors());
 
