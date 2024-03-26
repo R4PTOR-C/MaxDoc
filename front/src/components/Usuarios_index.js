@@ -7,7 +7,7 @@ const Usuarios_index = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://localhost:3001/usuarios')
+        fetch('https://maxdoc.onrender.com/usuarios')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro na resposta do servidor');
