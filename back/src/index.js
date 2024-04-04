@@ -33,6 +33,24 @@ app.post('/usuarios', async (req, res) => {
     }
 });
 
+app.delete('/usuarios/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const resultado = await db.query('DELETE FROM usuarios WHERE id = $1', [id]);
+
+        if (resultado.rowCount === 0) {
+            return res.status(404).json({ error: 'Usuário não encontrado' });
+        }
+
+        res.status(204).send(); // No Content
+    } catch (error) {
+        console.error("Erro ao deletar o usuário:", error);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
+
 
 
 app.listen(port, () => {

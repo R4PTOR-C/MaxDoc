@@ -28,6 +28,27 @@ const Usuarios_index = () => {
     if (loading) return <div>Carregando...</div>;
     if (error) return <div>Erro: {error}</div>;
 
+
+    const deleteUser = (userId) => {
+        fetch(`https://maxdoc.onrender.com/usuarios/${userId}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Falha ao deletar o usuário');
+                }
+                // Remover o usuário deletado da lista de usuários no estado
+                setUsuarios(usuarios.filter(user => user.id !== userId));
+            })
+            .catch(error => {
+                console.error("Erro ao deletar o usuário:", error);
+                alert(error.message);
+            });
+    };
+
+
+
+
     return (
 
         <div className="overflow-x-auto">
@@ -42,6 +63,7 @@ const Usuarios_index = () => {
                         <th scope="col" className="px-6 py-3">Idade</th>
                         <th scope="col" className="px-6 py-3">Gênero</th>
                         <th scope="col" className="px-6 py-3">Email</th>
+                        <th scope="col" className="px-6 py-3">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,6 +74,13 @@ const Usuarios_index = () => {
                             <td className="px-6 py-4">{usuario.idade}</td>
                             <td className="px-6 py-4">{usuario.genero}</td>
                             <td className="px-6 py-4">{usuario.email}</td>
+                            <td className="px-6 py-4">
+                                <button onClick={() => deleteUser(usuario.id)} title="Deletar Usuário">
+                                    <img className="delete-icon" src="./delete.png" alt="Deletar"/>
+                                </button>
+                            </td>
+
+
                         </tr>
                     ))}
                     </tbody>
