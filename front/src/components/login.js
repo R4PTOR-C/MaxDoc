@@ -52,6 +52,7 @@ function Login() {
                             <a href="#">Forgot password?</a>
                         </div>
                         <button type="submit" className="login-btn">LOGIN</button>
+                        <p> Não tem conta ? <a  href="usuarios/new">Cadastre-se grátis.</a></p>
                     </form>
                 </div>
             </div>
