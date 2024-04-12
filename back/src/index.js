@@ -20,7 +20,7 @@ app.get('/usuarios', async (req, res) => {
 });
 
 app.post('/usuarios', async (req, res) => {
-    const { nome, idade, genero, email,senha } = req.body; // Extrai os dados do corpo da solicitação
+    const { nome, idade, genero, email, senha } = req.body; // Extrai os dados do corpo da solicitação
     try {
         const resultado = await db.query(
             'INSERT INTO usuarios (nome, idade, genero, email, senha) VALUES ($1, $2, $3, $4, $5) RETURNING *',

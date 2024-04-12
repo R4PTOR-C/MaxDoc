@@ -10,7 +10,7 @@ const Usuarios_index = () => {
     useEffect(() => {
         setLoading(true);
         //maxdoc.onrender.com
-        fetch('http://maxdoc.onrender.com/usuarios')
+        fetch('https://maxdoc.onrender.com/usuarios')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro na resposta do servidor');
@@ -29,7 +29,7 @@ const Usuarios_index = () => {
     }, []);
 
     const deleteUser = (id) => {
-        fetch(`http://maxdoc.onrender.com/usuarios/${id}`, {
+        fetch(`https://maxdoc.onrender.com/usuarios/${id}`, {
             method: 'DELETE',
         })
             .then(response => {
