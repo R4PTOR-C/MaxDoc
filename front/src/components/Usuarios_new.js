@@ -13,7 +13,7 @@ function Usuarios_new() {
         const usuario = { nome, idade, genero, email,senha };
 
         try {
-            const response = await fetch(`https://maxdoc.onrender.com/usuarios`, {
+            const response = await fetch(`http://maxdoc.onrender.com/usuarios`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

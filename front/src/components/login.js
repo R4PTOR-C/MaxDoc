@@ -1,14 +1,34 @@
 import React, {useState} from 'react';
+import {redirect, useNavigate} from "react-router-dom";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Adicione aqui a lógica de autenticação
+        // Envio dos dados para o servidor
+        fetch('https://maxdoc.onrender.com/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'Login bem-sucedido') {
+                    navigate('/home');
+                } else {
+                    alert(data.message); // Exibe mensagem de erro do servidor
+                }
+            })
+            .catch(error => console.error('Erro ao fazer login:', error));
     };
+
 
     return (
         <div className="login-page">
