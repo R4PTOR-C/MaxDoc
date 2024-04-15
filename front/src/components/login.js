@@ -11,7 +11,7 @@ function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         // Envio dos dados para o servidor
-        fetch('https://maxdoc.onrender.com/', {
+        fetch(`${process.env.REACT_APP_API_URL}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
