@@ -25,20 +25,16 @@ const Usuarios_index = () => {
             });
     }, []);
 
-    if (loading) return <div>Carregando...</div>;
-    if (error) return <div>Erro: {error}</div>;
-
-
-    const deleteUser = (userId) => {
-        fetch(`https://maxdoc.onrender.com/usuarios/${userId}`, {
+    const deleteUser = (id) => {
+        fetch(`https://maxdoc.onrender.com/usuarios/${id}`, {
             method: 'DELETE',
         })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Falha ao deletar o usuário');
                 }
-                // Remover o usuário deletado da lista de usuários no estado
-                setUsuarios(usuarios.filter(user => user.id !== userId));
+                // Filtra o usuário deletado fora do estado de usuários
+                setUsuarios(usuarios.filter(user => user.id !== id));
             })
             .catch(error => {
                 console.error("Erro ao deletar o usuário:", error);
@@ -46,16 +42,15 @@ const Usuarios_index = () => {
             });
     };
 
-
-
+    if (loading) return <div>Carregando...</div>;
+    if (error) return <div>Erro: {error}</div>;
 
     return (
 
         <div className="overflow-x-auto">
             <h1 className="text-2xl font-bold mb-4">Usuários</h1>
-
             <div className="min-w-full">
-                <table className="table-auto w-full text-left">
+                <table className="table table-hover w-full text-left">
                     <thead className="bg-gray-200">
                     <tr>
                         <th scope="col" className="px-6 py-3">ID</th>
@@ -63,7 +58,7 @@ const Usuarios_index = () => {
                         <th scope="col" className="px-6 py-3">Idade</th>
                         <th scope="col" className="px-6 py-3">Gênero</th>
                         <th scope="col" className="px-6 py-3">Email</th>
-                        <th scope="col" className="px-6 py-3">Ações</th>
+                        <th scope="col" className="px-6 py-3"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -75,12 +70,11 @@ const Usuarios_index = () => {
                             <td className="px-6 py-4">{usuario.genero}</td>
                             <td className="px-6 py-4">{usuario.email}</td>
                             <td className="px-6 py-4">
-                                <button onClick={() => deleteUser(usuario.id)} title="Deletar Usuário">
-                                    <img className="delete-icon" src="./delete.png" alt="Deletar"/>
+                                <button onClick={() => deleteUser(usuario.id)} className="delete-btn"
+                                        title="Deletar Usuário">
+                                    <img src='./delete.png' alt="Ícone de delete"/>
                                 </button>
                             </td>
-
-
                         </tr>
                     ))}
                     </tbody>
