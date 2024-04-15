@@ -20,11 +20,11 @@ app.get('/usuarios', async (req, res) => {
 });
 
 app.post('/usuarios', async (req, res) => {
-    const { nome, idade, genero, email } = req.body; // Extrai os dados do corpo da solicitação
+    const { nome, idade, genero, email, senha } = req.body; // Extrai os dados do corpo da solicitação
     try {
         const resultado = await db.query(
-            'INSERT INTO usuarios (nome, idade, genero, email) VALUES ($1, $2, $3, $4) RETURNING *',
-            [nome, idade, genero, email]
+            'INSERT INTO usuarios (nome, idade, genero, email, senha) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [nome, idade, genero, email, senha]
         );
         res.status(201).json(resultado.rows[0]); // Retorna o usuário inserido
     } catch (err) {
@@ -55,6 +55,29 @@ app.delete('/usuarios/:id', async (req, res) => {
     }
 });
 
+app.post('/', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        // Verifica se o email existe no banco de dados
+        const result = await db.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+        if (result.rows.length === 0) {
+            return res.status(401).json({ message: 'Usuário não encontrado' });
+        }
+
+        // Usuário encontrado, agora verificar a senha
+        const user = result.rows[0];
+        if (user.senha !== password) {
+            return res.status(401).json({ message: 'Senha incorreta' });
+        }
+
+        // Se a senha está correta
+        res.json({ message: 'Login bem-sucedido', user: { id: user.id, nome: user.nome, email: user.email } });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+});
 
 
 

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const Usuarios_index = () => {
     const [usuarios, setUsuarios] = useState([]);
@@ -7,7 +9,8 @@ const Usuarios_index = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('https://maxdoc.onrender.com/usuarios')
+        //maxdoc.onrender.com
+        fetch(`${process.env.REACT_APP_API_URL}/usuarios`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro na resposta do servidor');
@@ -26,7 +29,7 @@ const Usuarios_index = () => {
     }, []);
 
     const deleteUser = (id) => {
-        fetch(`https://maxdoc.onrender.com/usuarios/${id}`, {
+        fetch(`${process.env.REACT_APP_API_URL}/usuarios/${id}`, {
             method: 'DELETE',
         })
             .then(response => {
@@ -49,8 +52,9 @@ const Usuarios_index = () => {
 
         <div className="overflow-x-auto">
             <h1 className="text-2xl font-bold mb-4">Usuários</h1>
+            <Link to="/usuarios/new" type="button" class="btn btn-outline-dark" >Adicionar Usuario</Link>
             <div className="min-w-full">
-                <table className="table table-hover w-full text-left">
+            <table className="table table-hover w-full text-left">
                     <thead className="bg-gray-200">
                     <tr>
                         <th scope="col" className="px-6 py-3">ID</th>

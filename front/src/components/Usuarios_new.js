@@ -5,13 +5,15 @@ function Usuarios_new() {
     const [idade, setIdade] = useState('');
     const [genero, setGenero] = useState('');
     const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const usuario = { nome, idade, genero, email };
+        const usuario = { nome, idade, genero, email,senha };
 
         try {
-            const response = await fetch(`https://maxdoc.onrender.com/usuarios`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/usuarios`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,6 +74,16 @@ function Usuarios_new() {
                         className="form-control"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Senha</label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        value={senha}
+                        onChange={(e) => setSenha(e.target.value)}
                         required
                     />
                 </div>
