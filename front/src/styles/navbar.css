@@ -1,0 +1,28 @@
+.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ajusta os elementos para que fiquem distribuídos ao longo da largura total */
+    width: 100%; /* Assegura que o contêiner ocupe toda a largura */
+}
+
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-text-nav {
+    font-family: 'Play', sans-serif;
+    font-size: 25px;
+    color: white;
+}
+
+.logo-image-nav {
+    width: 25px;
+    height: auto;
+}
+
+.nav-link{
+    color: white !important;
+}
