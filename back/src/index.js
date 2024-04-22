@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./db');
-
+const bcrypt = require('bcrypt');
 const app = express();
 const port = process.env.PORT || 3001; // Render vai fornecer a PORT
 const cors = require('cors');
@@ -20,13 +20,19 @@ app.get('/usuarios', async (req, res) => {
 });
 
 app.post('/usuarios', async (req, res) => {
-    const { nome, idade, genero, email, senha } = req.body; // Extrai os dados do corpo da solicitação
+    const { nome, idade, genero, email, senha } = req.body;
+
     try {
+        // Gerar um hash da senha
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(senha, saltRounds);
+
+        // Inserir o usuário com a senha hash no banco de dados
         const resultado = await db.query(
             'INSERT INTO usuarios (nome, idade, genero, email, senha) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [nome, idade, genero, email, senha]
+            [nome, idade, genero, email, hashedPassword]
         );
-        res.status(201).json(resultado.rows[0]); // Retorna o usuário inserido
+        res.status(201).json(resultado.rows[0]);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Internal server error' });
@@ -56,18 +62,28 @@ app.delete('/usuarios/:id', async (req, res) => {
 });
 
 app.post('/', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, senha } = req.body; // Certifique-se de que "senha" está sendo enviada corretamente
 
     try {
-        // Verifica se o email existe no banco de dados
+        // Primeiro, verifica se o e-mail existe no banco de dados
         const result = await db.query('SELECT * FROM usuarios WHERE email = $1', [email]);
         if (result.rows.length === 0) {
             return res.status(401).json({ message: 'Usuário não encontrado' });
         }
 
-        // Usuário encontrado, agora verificar a senha
         const user = result.rows[0];
-        if (user.senha !== password) {
+        console.log("Senha recebida:", senha); // Log para verificar a senha recebida
+        console.log("Hash no banco:", user.senha); // Log para verificar o hash recuperado
+
+        // Antes de tentar comparar, verifica se há dados suficientes
+        if (!senha || !user.senha) {
+            console.error("Senha ou hash da senha não fornecidos.");
+            return res.status(400).json({ message: 'Dados incompletos' });
+        }
+
+        // Comparar a senha fornecida com o hash armazenado
+        const match = await bcrypt.compare(senha, user.senha);
+        if (!match) {
             return res.status(401).json({ message: 'Senha incorreta' });
         }
 
@@ -78,6 +94,9 @@ app.post('/', async (req, res) => {
         res.status(500).json({ message: 'Erro interno do servidor' });
     }
 });
+
+
+
 
 
 

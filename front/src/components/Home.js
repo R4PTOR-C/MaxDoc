@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
+import React from "react";
 
-function Home() {
-    return(
-        <div>
-            <h1>Home</h1>
-        </div>
+const Home = () => {
+    return (
+        <p>Home</p>
     );
-}
+};
 
 export default Home;

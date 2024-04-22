@@ -3,7 +3,7 @@ import {redirect, useNavigate} from "react-router-dom";
 
 function Login() {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [senha, setSenha] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ function Login() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ email, senha })
         })
             .then(response => response.json())
             .then(data => {
@@ -55,24 +55,16 @@ function Login() {
                         <input
                             type="password"
                             className="login-input"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="senha"
+                            value={senha}
+                            onChange={(e) => setSenha(e.target.value)}
                             required
                         />
                         <div className="login-remember">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={rememberMe}
-                                    onChange={(e) => setRememberMe(e.target.checked)}
-                                />
-                                Remember
-                            </label>
-                            <a href="#">Forgot password?</a>
+                            <a href="#">Esqueceu a senha?</a>
                         </div>
-                        <button type="submit" className="login-btn">LOGIN</button>
-                        <p> Não tem conta ? <a  href="usuarios/new">Cadastre-se grátis.</a></p>
+                        <button type="submit" className="login-btn">ENTRAR</button>
+                        <p> Não tem conta ? <a  href="usuarios/new">Cadastre-se</a></p>
                     </form>
                 </div>
             </div>
