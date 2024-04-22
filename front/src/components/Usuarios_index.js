@@ -50,11 +50,11 @@ const Usuarios_index = () => {
 
     return (
 
-        <div className="overflow-x-auto">
+        <div className="overflow-auto">
             <h1 className="text-2xl font-bold mb-4">Usuários</h1>
-            <Link to="/usuarios/new" type="button" class="btn btn-outline-dark" >Adicionar Usuario</Link>
-            <div className="min-w-full">
-            <table className="table table-hover w-full text-left">
+            <Link to="/usuarios/new" className="btn btn-outline-dark mb-3">Adicionar Usuário</Link>
+            <div className="table-responsive">
+                <table className="table table-hover">
                     <thead className="bg-gray-200">
                     <tr>
                         <th scope="col" className="px-6 py-3">ID</th>
@@ -62,32 +62,30 @@ const Usuarios_index = () => {
                         <th scope="col" className="px-6 py-3">Idade</th>
                         <th scope="col" className="px-6 py-3">Gênero</th>
                         <th scope="col" className="px-6 py-3">Email</th>
-                        <th scope="col" className="px-6 py-3"></th>
+                        <th scope="col" className="px-6 py-3">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
                     {usuarios.map(usuario => (
-                        <tr key={usuario.id} className="border-b">
+                        <tr key={usuario.id}>
                             <th scope="row" className="px-6 py-4">{usuario.id}</th>
                             <td className="px-6 py-4">{usuario.nome}</td>
                             <td className="px-6 py-4">{usuario.idade}</td>
                             <td className="px-6 py-4">{usuario.genero}</td>
                             <td className="px-6 py-4">{usuario.email}</td>
                             <td className="px-6 py-4">
-                                <button onClick={() => deleteUser(usuario.id)} className="delete-btn"
-                                        title="Deletar Usuário">
-                                    <img src='./delete.png' alt="Ícone de delete"/>
-                                </button>
+                                <img src='./delete.png' alt="Ícone de delete" className="delete-btn"
+                                     onClick={() => deleteUser(usuario.id)}/>
                             </td>
+
                         </tr>
                     ))}
                     </tbody>
                 </table>
             </div>
         </div>
-
-
     );
 }
+
 
 export default Usuarios_index;
