@@ -61,18 +61,10 @@ function Login() {
                             required
                         />
                         <div className="login-remember">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    checked={rememberMe}
-                                    onChange={(e) => setRememberMe(e.target.checked)}
-                                />
-                                Remember
-                            </label>
-                            <a href="#">Forgot password?</a>
+                            <a href="#">Esqueceu a senha?</a>
                         </div>
-                        <button type="submit" className="login-btn">LOGIN</button>
-                        <p> Não tem conta ? <a  href="usuarios/new">Cadastre-se grátis.</a></p>
+                        <button type="submit" className="login-btn">ENTRAR</button>
+                        <p> Não tem conta ? <a  href="usuarios/new">Cadastre-se</a></p>
                     </form>
                 </div>
             </div>
