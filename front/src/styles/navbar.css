@@ -1,15 +1,13 @@
-.container-fluid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Ajusta os elementos para que fiquem distribuídos ao longo da largura total */
-    width: 100%; /* Assegura que o contêiner ocupe toda a largura */
-}
-
-
 .flex-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between; /* Distribui espaço igualmente entre os elementos dentro do contêiner */
+}
+
+.container-fluid {
+    display: flex;
+    justify-content: space-between; /* Espaça os itens igualmente, incluindo o logo e o menu */
+    width: 100%;
 }
 
 .logo-text-nav {
@@ -23,6 +21,6 @@
     height: auto;
 }
 
-.nav-link{
+.nav-link {
     color: white !important;
 }

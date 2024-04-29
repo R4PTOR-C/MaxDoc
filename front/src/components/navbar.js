@@ -7,28 +7,42 @@ function Navbar() {
             <div className="container-fluid">
                 <div className="flex-container">
                     <h1 className="logo-text-nav">MAX</h1>
-                    <img className="logo-image-nav" src='./maxdoc-logo.png' alt="Descrição da Imagem"/>
+                    <img className="logo-image-nav" src='./maxdoc-logo.png' alt="Logo Descrição"/>
                     <h1 className="logo-text-nav">DOC</h1>
                 </div>
-                <p></p>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
+                    <ul className="navbar-nav ms-auto"> {/* ms-auto empurra os itens para a direita */}
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Medicamentos
+                            </a>
+                            <ul className="dropdown-menu">
+                                <li><a className="dropdown-item" href="#">Estoque</a></li>
+                                <li><a className="dropdown-item" href="#">Adicionar remédio</a></li>
+                            </ul>
                         </li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Lembretes
+                            </a>
+                            <ul className="dropdown-menu">
+                                <li><a className="dropdown-item" href="#">Checar Lembretes</a></li>
+                                <li><a className="dropdown-item" href="#">Criar Lembrete</a></li>
+                            </ul>
+                        </li>
+                        <img src="./usuario.png" alt="Descrição da Imagem" className="logo-image-nav"/>
                     </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>
+
     );
 }
 
