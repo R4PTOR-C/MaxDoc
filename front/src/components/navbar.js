@@ -1,48 +1,48 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Importe isso se você estiver usando react-router para a navegação
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
-    return (
-        <nav className="navbar navbar-expand-lg" style={{backgroundColor: '#b82f27'}}>
-            <div className="container-fluid">
-                <div className="flex-container">
-                    <h1 className="logo-text-nav">MAX</h1>
-                    <img className="logo-image-nav" src='./maxdoc-logo.png' alt="Logo Descrição"/>
-                    <h1 className="logo-text-nav">DOC</h1>
-                </div>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ms-auto"> {/* ms-auto empurra os itens para a direita */}
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                Medicamentos
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Estoque</a></li>
-                                <li><a className="dropdown-item" href="#">Adicionar remédio</a></li>
-                            </ul>
-                        </li>
-                        <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                Lembretes
-                            </a>
-                            <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="#">Checar Lembretes</a></li>
-                                <li><a className="dropdown-item" href="#">Criar Lembrete</a></li>
-                            </ul>
-                        </li>
-                        <img src="./usuario.png" alt="Descrição da Imagem" className="logo-image-nav"/>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    const [isActive, setIsActive] = useState(false);
 
+    const toggleMenu = () => {
+        setIsActive(!isActive);
+    };
+
+    return (
+        <header className="navBar">
+            <nav className={`nav ${isActive ? 'active' : ''}`}>
+                <div className="logo">
+                    <h1 className="logoTxt">MAX</h1>
+                    <img className="logoimg" src="/maxdoc-logo.png" width="30" height="30" alt="MaxDoc Logo" />
+                    <h1 className="logoTxt">DOC</h1>
+                </div>
+                <button className="hamburger" onClick={toggleMenu}></button>
+                <ul className="navList">
+                    <li><Link to="/"><button className="botao">Início</button></Link></li>
+                    <li>
+                        <button className="botao">Medicamentos<i className='bx bx-down-arrow-alt'></i></button>
+                        <div className="submenu1">
+                            <ul>
+                                <li><Link to="/estoque">Estoque</Link></li>
+                                <li><Link to="/adicionar-remedio">Adicionar remédio</Link></li>
+                                <li><Link to="/remover-remedio">Remover remédio</Link></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <button className="botao">Lembretes<i className='bx bx-down-arrow-alt'></i></button>
+                        <div className="submenu1">
+                            <ul>
+                                <li><Link to="/chegar-lembretes">Chegar Lembretes</Link></li>
+                                <li><Link to="/criar-lembrete">Criar lembrete</Link></li>
+                                <li><Link to="/apagar-lembrete">Apagar lembrete</Link></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><Link to="/perfil"><img src="/usuario.png" alt="Foto do usuário" width="30" height="30" /></Link></li>
+                </ul>
+            </nav>
+        </header>
     );
 }
 
