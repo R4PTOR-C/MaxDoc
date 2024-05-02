@@ -1,33 +1,31 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Importe Link de react-router-dom para navegação
+import { Link } from 'react-router-dom';
 
 function Navbar() {
-    const [isActive, setIsActive] = useState(false); // State para controlar a visibilidade do menu
+    const [isActive, setIsActive] = useState(false);
 
     const toggleMenu = () => {
-        setIsActive(!isActive); // Alterna o estado do menu
+        setIsActive(!isActive);
     };
 
     return (
         <header className="navBar">
-            <nav className="nav">
+            <nav className={`nav ${isActive ? 'active' : ''}`}>
                 <div className="logo">
                     <h1 className="logoTxt">MAX</h1>
-                    <img className="logoimg" src="/maxdoc-logo.png" alt="Logo MAXDOC" width="30" height="30" />
+                    <img className="logoimg" src="/maxdoc-logo.png" width="30" height="30" alt="MaxDoc Logo" />
                     <h1 className="logoTxt">DOC</h1>
                 </div>
                 <button className="hamburger" onClick={toggleMenu}></button>
-                <ul className={`navList ${isActive ? 'active' : ''}`}> {/* Toggle classes based on state */}
-                    <li>
-                        <Link to="/"><button className="botao">Início</button></Link>
-                    </li>
+                <ul className="navList">
+                    <li><Link to="/"><button className="botao">Início</button></Link></li>
                     <li>
                         <button className="botao">Medicamentos<i className='bx bx-down-arrow-alt'></i></button>
                         <div className="submenu1">
                             <ul>
-                                <li><Link to="#">Estoque</Link></li>
-                                <li><Link to="/medicamentos">Adicionar remédio</Link></li>
-                                <li><Link to="#">Remover remédio</Link></li>
+                                <li><Link to="/estoque">Estoque</Link></li>
+                                <li><Link to="/adicionar-remedio">Adicionar remédio</Link></li>
+                                <li><Link to="/remover-remedio">Remover remédio</Link></li>
                             </ul>
                         </div>
                     </li>
@@ -35,15 +33,13 @@ function Navbar() {
                         <button className="botao">Lembretes<i className='bx bx-down-arrow-alt'></i></button>
                         <div className="submenu1">
                             <ul>
-                                <li><Link to="#">Checar Lembretes</Link></li>
-                                <li><Link to="/lembrete">Criar lembrete</Link></li>
-                                <li><Link to="#">Apagar lembrete</Link></li>
+                                <li><Link to="/chegar-lembretes">Chegar Lembretes</Link></li>
+                                <li><Link to="/criar-lembrete">Criar lembrete</Link></li>
+                                <li><Link to="/apagar-lembrete">Apagar lembrete</Link></li>
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <Link to="#"><img src="/usuario.png" alt="ftUsuario" width="30" height="30" /></Link>
-                    </li>
+                    <li><Link to="/perfil"><img src="/usuario.png" alt="Foto do usuário" width="30" height="30" /></Link></li>
                 </ul>
             </nav>
         </header>
