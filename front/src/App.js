@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Outlet} from 'react-router-dom';
 import './styles/App.css';
 import './styles/login.css';
 import './styles/navbar.css'
@@ -9,19 +9,25 @@ import Usuarios_new from "./components/Usuarios_new";
 import Home from './components/Home';
 import Navbar from "./components/navbar";
 
+function Layout() {
+    return (
+        <>
+            <Navbar />
+            <Outlet />
+        </>
+    );
+}
+
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login/>}/>
-            </Routes>
-
-            <Navbar/>
-
-            <Routes>
-                <Route path="/usuarios" element={<Usuarios_index/>}/>
-                <Route path="/usuarios/new" element={<Usuarios_new/>}/>
-                <Route path="/home" element={<Home/>}/>
+                <Route path="/" element={<Login />} />
+                <Route path="/" element={<Layout />}>
+                    <Route path="home" element={<Home />} />
+                    <Route path="usuarios" element={<Usuarios_index />} />
+                    <Route path="usuarios/new" element={<Usuarios_new />} />
+                </Route>
             </Routes>
         </Router>
     );
