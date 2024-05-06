@@ -11,14 +11,15 @@ function Navbar() {
     return (
         <header className="navBar">
             <nav className={`nav ${isActive ? 'active' : ''}`}>
+                <Link to="/home" style={{textDecoration: 'none'}}>
                 <div  className="logo">
                     <h1 className="logoTxt">MAX</h1>
-                    <img className="logoimg" src="/maxdoc-logo.png" width="50" height="auto" alt="MaxDoc Logo" />
+                    <img className="logoimg" src="/maxdoc-logo.png" width="40" height="auto" alt="MaxDoc Logo" />
                     <h1 className="logoTxt">DOC</h1>
                 </div>
+                </Link>
                 <button className="hamburger" onClick={toggleMenu}></button>
                 <ul className="navList">
-                    <li><Link to="/"><button className="botao">Início</button></Link></li>
                     <li>
                         <button className="botao">Medicamentos<i className='bx bx-down-arrow'></i></button>
                         <div className="submenu1">

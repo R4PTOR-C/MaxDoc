@@ -37,12 +37,13 @@ const Home = () => {
                         <div className="home">
                             <h1>OLÁ, SEJA BEM VINDO NOVAMENTE (USUÁRIO)!</h1>
                         </div>
-                        <div className="lembrete">
-                            <h2>Próximo Remédio a ser tomado é "Deca-Durabolin"</h2>
-                            <p>Deca é uma abreviação comum para o esteroide anabolizante conhecido como Deca-Durabolin. O
-                                nome químico completo da substância é decanoato de nandrolona. Este composto é derivado da
-                                nandrolona e é frequentemente utilizado para fins terapêuticos e não terapêuticos</p>
-                        </div>
+                        {remedios.map(remedios => (
+
+                            <div className="lembrete">
+                            <h2>Próximo Remédio a ser tomado é {remedios.nome}</h2>
+                            <p>{remedios.obs}</p>
+                            </div>
+                            ))}
                         <div className="calendario">
                             <div className="diasSemanas">
                                 <p>SEGUNDA</p>
