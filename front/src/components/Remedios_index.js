@@ -28,6 +28,22 @@ const Remedios_index = () => {
             });
     }, []);
 
+    const deleteRemedio = (id) => {
+        fetch(`${process.env.REACT_APP_API_URL}/remedios/${id}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Falha ao deletar o remedio');
+                }
+                // Filtra o usuário deletado fora do estado de usuários
+                setRemedios(remedios.filter(user => user.id !== id));
+            })
+            .catch(error => {
+                console.error("Erro ao deletar o usuário:", error);
+                alert(error.message);
+            });
+    };
 
     if (loading) return <div>Carregando...</div>;
     if (error) return <div>Erro: {error}</div>;
@@ -47,17 +63,22 @@ const Remedios_index = () => {
                         <th scope="col" className="px-6 py-3">Formulação</th>
                         <th scope="col" className="px-6 py-3">Dosagem</th>
                         <th scope="col" className="px-6 py-3">Observação</th>
+                        <th scope="col" className="px-6 py-3">Ações</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {remedios.map(remedios => (
-                        <tr key={remedios.id}>
-                            <th scope="row" className="px-6 py-4">{remedios.id}</th>
-                            <td className="px-6 py-4">{remedios.nome}</td>
-                            <td className="px-6 py-4">{remedios.categoria}</td>
-                            <td className="px-6 py-4">{remedios.formulacao}</td>
-                            <td className="px-6 py-4">{remedios.dosagem}</td>
-                            <td className="px-6 py-4">{remedios.obs}</td>
+                    {remedios.map(remedio => (
+                        <tr key={remedio.id}>
+                            <th scope="row" className="px-6 py-4">{remedio.id}</th>
+                            <td className="px-6 py-4">{remedio.nome}</td>
+                            <td className="px-6 py-4">{remedio.categoria}</td>
+                            <td className="px-6 py-4">{remedio.formulacao}</td>
+                            <td className="px-6 py-4">{remedio.dosagem}</td>
+                            <td className="px-6 py-4">{remedio.obs}</td>
+                            <td className="px-6 py-4">
+                                <img src='./delete.png' alt="Ícone de delete" className="delete-btn"
+                                     onClick={() => deleteRemedio(remedio.id)}/>
+                            </td>
                         </tr>
                     ))}
                     </tbody>

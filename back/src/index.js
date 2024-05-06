@@ -121,6 +121,28 @@ app.post('/remedios', async (req, res) => {
     }
 });
 
+app.delete('/remedios/:id', async (req, res) => {
+    const { id } = req.params; // Extrai o ID do usuário da URL
+
+    try {
+        const resultado = await db.query(
+            'DELETE FROM remedios WHERE id = $1 RETURNING *', // Query para deletar o usuário baseado no ID
+            [id]
+        );
+
+        if (resultado.rowCount === 0) {
+            // Nenhum usuário foi encontrado/deletado
+            return res.status(404).json({error: 'Remedio não encontrado'});
+        }
+
+        // Usuário deletado com sucesso, retorna o usuário deletado
+        res.json(resultado.rows[0]);
+    } catch (err) {
+        console.error('Erro ao deletar o remedio:', err);
+        res.status(500).json({error: 'Internal server error'});
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
