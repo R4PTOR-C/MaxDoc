@@ -1,34 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Importe isso se você estiver usando react-router para a navegação
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
+    const [isActive, setIsActive] = useState(false);
+
+    const toggleMenu = () => {
+        setIsActive(!isActive);
+    };
+
     return (
-        <nav className="navbar navbar-expand-lg" style={{backgroundColor: '#b82f27'}}>
-            <div className="container-fluid">
-                <div className="flex-container">
-                    <h1 className="logo-text-nav">MAX</h1>
-                    <img className="logo-image-nav" src='./maxdoc-logo.png' alt="Descrição da Imagem"/>
-                    <h1 className="logo-text-nav">DOC</h1>
+        <header className="navBar">
+            <nav className={`nav ${isActive ? 'active' : ''}`}>
+                <Link to="/home" style={{textDecoration: 'none'}}>
+                <div  className="logo">
+                    <h1 className="logoTxt">MAX</h1>
+                    <img className="logoimg" src="/maxdoc-logo.png" width="40" height="auto" alt="MaxDoc Logo" />
+                    <h1 className="logoTxt">DOC</h1>
                 </div>
-                <p></p>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                    </ul>
-                    <form className="d-flex" role="search">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
+                </Link>
+                <button className="hamburger" onClick={toggleMenu}></button>
+                <ul className="navList">
+                    <li>
+                        <button className="botao">Medicamentos<i className='bx bx-down-arrow'></i></button>
+                        <div className="submenu1">
+                            <ul>
+                                <li><Link to="/remedios">Estoque</Link></li>
+                                <li><Link to="/remedios/new">Adicionar remédio</Link></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <button className="botao">Lembretes<i className='bx bx-down-arrow'></i></button>
+                        <div className="submenu1">
+                            <ul>
+                                <li><Link to="/chegar-lembretes">Chegar Lembretes</Link></li>
+                                <li><Link to="/criar-lembrete">Criar lembrete</Link></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><Link to="/perfil"><img src="/usuario.png" alt="Foto do usuário" width="40" height="auto" /></Link></li>
+                </ul>
+            </nav>
+        </header>
     );
 }
 

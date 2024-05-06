@@ -95,9 +95,53 @@ app.post('/', async (req, res) => {
     }
 });
 
+app.get('/remedios', async (req, res) => {
+    try {
+        const { rows } = await db.query('SELECT * FROM remedios');
+        console.log(rows); // Imprime os dados na console do servidor
+        res.json(rows); // Envia os dados como JSON para o cliente
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: 'Internal server error'});
+    }
+});
 
+app.post('/remedios', async (req, res) => {
+    const { nome, categoria, formulacao, dosagem, obs } = req.body;
 
+    try {
+        const resultado = await db.query(
+            'INSERT INTO remedios (nome, categoria, formulacao, dosagem, obs) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [nome, categoria, formulacao, dosagem, obs]
+        );
+        res.status(201).json(resultado.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
+app.delete('/remedios/:id', async (req, res) => {
+    const { id } = req.params; // Extrai o ID do usuário da URL
+
+    try {
+        const resultado = await db.query(
+            'DELETE FROM remedios WHERE id = $1 RETURNING *', // Query para deletar o usuário baseado no ID
+            [id]
+        );
+
+        if (resultado.rowCount === 0) {
+            // Nenhum usuário foi encontrado/deletado
+            return res.status(404).json({error: 'Remedio não encontrado'});
+        }
+
+        // Usuário deletado com sucesso, retorna o usuário deletado
+        res.json(resultado.rows[0]);
+    } catch (err) {
+        console.error('Erro ao deletar o remedio:', err);
+        res.status(500).json({error: 'Internal server error'});
+    }
+});
 
 
 app.listen(port, () => {

@@ -1,28 +1,210 @@
-.container-fluid {
+* {
+    margin: 0;
+    padding: 0;
+}
+
+p{
+    font-size: 17px;
+}
+.botao{
+    font-size: 17px;
+    background-color: transparent;
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: .2s  ;
+}
+.botao:hover{
+    transform: scale(1.1);
+    color: #fff;
+}
+
+li{
+    list-style: none;
+}
+/*     nav     */
+
+.navBar {
+    background: #b82f27;
+    padding-inline: 3%;
+}
+
+.nav {
+    max-width: 1280px;
+    height: 70px;
+    margin-inline: auto;
+
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: space-between; /* Ajusta os elementos para que fiquem distribuídos ao longo da largura total */
-    width: 100%; /* Assegura que o contêiner ocupe toda a largura */
 }
 
-
-.flex-container {
+.logo {
+    color: #fff;
+    font-size: 20px;
+    align-items: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
+    gap: 5px ;
 }
 
-.logo-text-nav {
-    font-family: 'Play', sans-serif;
-    font-size: 25px;
-    color: white;
+.navList{
+    display: flex;
+    gap: 32px;
+    list-style: none;
 }
 
-.logo-image-nav {
-    width: 25px;
-    height: auto;
+.navList li a {
+    font-size: 18px;
+    color: #fff;
+    padding-block: 16px;
+    text-decoration: none;
 }
 
-.nav-link{
-    color: white !important;
+.botao i{
+    transition: transform 0.5s ease;
+}
+.botao:hover i{
+    transform: rotate(180deg);
+}
+/*                      menu dropdown         */
+.submenu1, .submenu2{
+    display: none;
+}
+.navList li:hover .submenu1 {
+    display: block;
+    position: absolute;
+    background-color:#b82f27;
+    margin-top: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.navList li:hover .submenu1 ul{
+    display: block;
+}
+.navList li:hover .submenu1 ul li{
+    width: 150px;
+    padding: 10px 5px;
+    text-align: center;
+    border-radius: 10px;
+    transition: .7s;
+}
+.navList li:hover .submenu1 ul li:hover{
+    background-color: #6E1C17;
+}
+
+
+
+
+.hamburger {
+    display: none;
+    border: none;
+    background: none;
+    border-top: 3px solid #FFF;
+    cursor: pointer;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: " ";
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #FFF;
+    margin-top: 5px;
+    position: relative;
+    transition: 0.3s;
+}
+
+.home {
+    display: none;
+}
+
+
+
+@media (max-width: 750px) {
+    .hamburger{
+        display: block;
+        z-index: 1;
+    }
+
+    .navList {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #b82f27;
+        clip-path: circle(100px at 112% -95px);
+        transition: 1s ease-out;
+
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: 0;
+        pointer-events: none;
+    }
+
+    .nav.active .navList {
+        clip-path: circle(1500px at 90% -15%);
+        pointer-events: all;
+    }
+
+    .navList a {
+        font-size: 24px;
+        opacity: 0;
+    }
+
+    .navList li:nth-child(1) a {
+        transition: 0.5s 0.2s;
+    }
+    .navList li:nth-child(2) a {
+        transition: 0.5s 0.4s;
+    }
+    .navList li:nth-child(3) a {
+        transition: 0.5s 0.6s;
+    }
+
+    .nav.active .navList a {
+        opacity: 1;
+    }
+
+    .nav.active .hamburger {
+        position: fixed;
+        top: 26px;
+        right: 16px;
+        border-top-color: transparent;
+    }
+
+    .nav.active .hamburger::before{
+        transform: rotate(135deg);
+    }
+    .nav.active .hamburger::after{
+        transform: rotate(-135deg);
+        top: -7px;
+    }
+
+    .interface {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .home {
+        display: block;
+        padding: 4%
+    }
+
+    .lembrete{
+        margin: 8% 2%;
+    }
+
+    .calendario{
+        width: 80vw; /* 50% da largura da janela do navegador */
+        height: 50vh; /* 50% da altura da janela do navegador */
+    }
 }

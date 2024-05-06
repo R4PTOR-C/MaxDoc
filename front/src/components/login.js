@@ -28,8 +28,7 @@ function Login() {
             })
             .catch(error => console.error('Erro ao fazer login:', error));
     };
-
-
+    
     return (
         <div className="login-page">
             <div className="welcome-section">
