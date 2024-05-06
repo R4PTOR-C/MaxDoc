@@ -23,7 +23,7 @@ function Navbar() {
                         <button className="botao">Medicamentos<i className='bx bx-down-arrow-alt'></i></button>
                         <div className="submenu1">
                             <ul>
-                                <li><Link to="/estoque">Estoque</Link></li>
+                                <li><Link to="/remedios">Estoque</Link></li>
                                 <li><Link to="/adicionar-remedio">Adicionar remédio</Link></li>
                                 <li><Link to="/remover-remedio">Remover remédio</Link></li>
                             </ul>

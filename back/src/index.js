@@ -95,7 +95,16 @@ app.post('/', async (req, res) => {
     }
 });
 
-
+app.get('/remedios', async (req, res) => {
+    try {
+        const { rows } = await db.query('SELECT * FROM remedios');
+        console.log(rows); // Imprime os dados na console do servidor
+        res.json(rows); // Envia os dados como JSON para o cliente
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: 'Internal server error'});
+    }
+});
 
 
 
