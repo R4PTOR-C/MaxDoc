@@ -11,16 +11,16 @@ function Navbar() {
     return (
         <header className="navBar">
             <nav className={`nav ${isActive ? 'active' : ''}`}>
-                <div className="logo">
+                <div  className="logo">
                     <h1 className="logoTxt">MAX</h1>
-                    <img className="logoimg" src="/maxdoc-logo.png" width="30" height="30" alt="MaxDoc Logo" />
+                    <img className="logoimg" src="/maxdoc-logo.png" width="50" height="auto" alt="MaxDoc Logo" />
                     <h1 className="logoTxt">DOC</h1>
                 </div>
                 <button className="hamburger" onClick={toggleMenu}></button>
                 <ul className="navList">
                     <li><Link to="/"><button className="botao">Início</button></Link></li>
                     <li>
-                        <button className="botao">Medicamentos<i className='bx bx-down-arrow-alt'></i></button>
+                        <button className="botao">Medicamentos<i className='bx bx-down-arrow'></i></button>
                         <div className="submenu1">
                             <ul>
                                 <li><Link to="/remedios">Estoque</Link></li>
@@ -29,7 +29,7 @@ function Navbar() {
                         </div>
                     </li>
                     <li>
-                        <button className="botao">Lembretes<i className='bx bx-down-arrow-alt'></i></button>
+                        <button className="botao">Lembretes<i className='bx bx-down-arrow'></i></button>
                         <div className="submenu1">
                             <ul>
                                 <li><Link to="/chegar-lembretes">Chegar Lembretes</Link></li>
@@ -37,7 +37,7 @@ function Navbar() {
                             </ul>
                         </div>
                     </li>
-                    <li><Link to="/perfil"><img src="/usuario.png" alt="Foto do usuário" width="30" height="30" /></Link></li>
+                    <li><Link to="/perfil"><img src="/usuario.png" alt="Foto do usuário" width="40" height="auto" /></Link></li>
                 </ul>
             </nav>
         </header>
