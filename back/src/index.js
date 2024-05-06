@@ -106,7 +106,20 @@ app.get('/remedios', async (req, res) => {
     }
 });
 
+app.post('/remedios', async (req, res) => {
+    const { nome, categoria, formulacao, dosagem, obs } = req.body;
 
+    try {
+        const resultado = await db.query(
+            'INSERT INTO remedios (nome, categoria, formulacao, dosagem, obs) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [nome, categoria, formulacao, dosagem, obs]
+        );
+        res.status(201).json(resultado.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 
 app.listen(port, () => {

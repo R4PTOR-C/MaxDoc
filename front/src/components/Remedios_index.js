@@ -36,7 +36,7 @@ const Remedios_index = () => {
 
         <div className="overflow-auto">
             <h1 className="text-2xl font-bold mb-4">Remedios</h1>
-            <Link to="/usuarios/new" className="btn btn-outline-dark mb-3">Adicionar Remedio</Link>
+            <Link to="/remedios/new" className="btn btn-outline-dark mb-3">Adicionar Remedio</Link>
             <div className="table-responsive">
                 <table className="table table-hover">
                     <thead className="bg-gray-200">
@@ -54,11 +54,10 @@ const Remedios_index = () => {
                         <tr key={remedios.id}>
                             <th scope="row" className="px-6 py-4">{remedios.id}</th>
                             <td className="px-6 py-4">{remedios.nome}</td>
-                            <td className="px-6 py-4">{remedios.idade}</td>
-                            <td className="px-6 py-4">{remedios.genero}</td>
-                            <td className="px-6 py-4">{remedios.email}</td>
-
-
+                            <td className="px-6 py-4">{remedios.categoria}</td>
+                            <td className="px-6 py-4">{remedios.formulacao}</td>
+                            <td className="px-6 py-4">{remedios.dosagem}</td>
+                            <td className="px-6 py-4">{remedios.obs}</td>
                         </tr>
                     ))}
                     </tbody>

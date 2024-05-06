@@ -9,6 +9,7 @@ import Usuarios_new from "./components/Usuarios_new";
 import Home from './components/Home';
 import Navbar from "./components/navbar";
 import Remedios_index from "./components/Remedios_index";
+import Remedios_new from "./components/Remedios_new";
 
 function Layout() {
     return (
@@ -29,6 +30,7 @@ function App() {
                     <Route path="usuarios" element={<Usuarios_index />} />
                     <Route path="usuarios/new" element={<Usuarios_new />} />
                     <Route path="remedios" element={<Remedios_index />} />
+                    <Route path="remedios/new" element={<Remedios_new />} />
                 </Route>
             </Routes>
         </Router>

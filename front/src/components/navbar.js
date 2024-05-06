@@ -24,8 +24,7 @@ function Navbar() {
                         <div className="submenu1">
                             <ul>
                                 <li><Link to="/remedios">Estoque</Link></li>
-                                <li><Link to="/adicionar-remedio">Adicionar remédio</Link></li>
-                                <li><Link to="/remover-remedio">Remover remédio</Link></li>
+                                <li><Link to="/remedios/new">Adicionar remédio</Link></li>
                             </ul>
                         </div>
                     </li>
@@ -35,7 +34,6 @@ function Navbar() {
                             <ul>
                                 <li><Link to="/chegar-lembretes">Chegar Lembretes</Link></li>
                                 <li><Link to="/criar-lembrete">Criar lembrete</Link></li>
-                                <li><Link to="/apagar-lembrete">Apagar lembrete</Link></li>
                             </ul>
                         </div>
                     </li>

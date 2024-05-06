@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
+    const [remedios, setRemedios] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        setLoading(true);
+        //maxdoc.onrender.com
+        fetch(`${process.env.REACT_APP_API_URL}/remedios`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na resposta do servidor');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setRemedios(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Erro ao buscar dados de remedios:", error);
+                setError(error.toString());
+                setLoading(false);
+            });
+    }, []);
+
     return (
 
         <>
@@ -41,20 +67,16 @@ const Home = () => {
                     <h1><i className='bx bxs-basket'></i>Medicamentos</h1>
                 </div>
                 <div className="descricao">
-                    <ul>
+                    {remedios.map(remedios => (
+
+                        <ul>
                         <li>
-                            <h2>Medicamento</h2>
-                            <p>Alívio imediato para os sintomas, restaurando o equilíbrio e promovendo bem-estar.</p>
+                            <h2>{remedios.nome}</h2>
+                            <p>{remedios.obs}</p>
                         </li>
-                        <li>
-                            <h2>Medicamento</h2>
-                            <p>Alívio imediato para os sintomas, restaurando o equilíbrio e promovendo bem-estar.</p>
-                        </li>
-                        <li>
-                            <h2>Medicamento</h2>
-                            <p>Alívio imediato para os sintomas, restaurando o equilíbrio e promovendo bem-estar.</p>
-                        </li>
+
                     </ul>
+                        ))}
                 </div>
             </section>
         </>
