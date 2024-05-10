@@ -52,7 +52,6 @@ const Remedios_index = () => {
 
         <div className="overflow-auto">
             <h1 className="text-2xl font-bold mb-4">Remedios</h1>
-            <Link to="/remedios/new" className="btn btn-outline-dark mb-3">Adicionar Remedio</Link>
             <div className="table-responsive">
                 <table className="table table-hover">
                     <thead className="bg-gray-200">
@@ -76,6 +75,9 @@ const Remedios_index = () => {
                             <td className="px-6 py-4">{remedio.dosagem}</td>
                             <td className="px-6 py-4">{remedio.obs}</td>
                             <td className="px-6 py-4">
+                                <Link to={`/remedios/edit/${remedio.id}`}>
+                                    <img src='./edit.png' alt="Ícone de editar" className="edit-btn" />
+                                </Link>
                                 <img src='./delete.png' alt="Ícone de delete" className="delete-btn"
                                      onClick={() => deleteRemedio(remedio.id)}/>
                             </td>
@@ -83,6 +85,8 @@ const Remedios_index = () => {
                     ))}
                     </tbody>
                 </table>
+                <Link to="/remedios/new" className="btn btn-outline-dark mb-3">Adicionar Remedio</Link>
+
             </div>
         </div>
     );

@@ -143,6 +143,48 @@ app.delete('/remedios/:id', async (req, res) => {
     }
 });
 
+app.get('/remedios/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const { rows } = await db.query('SELECT * FROM remedios WHERE id = $1', [id]);
+        if (rows.length === 0) {
+            return res.status(404).send('Remédio não encontrado');
+        }
+        res.json(rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
+app.put('/remedios/:id', async (req, res) => {
+    const { id } = req.params; // Extrai o ID do remédio da URL
+    const { nome, categoria, formulacao, dosagem, obs } = req.body; // Dados que serão atualizados
+
+    try {
+        // Query de atualização com a cláusula WHERE para encontrar o registro correto
+        const resultado = await db.query(
+            `UPDATE remedios
+             SET nome = $1, categoria = $2, formulacao = $3, dosagem = $4, obs = $5
+             WHERE id = $6
+             RETURNING *`, // Retorna os dados atualizados
+            [nome, categoria, formulacao, dosagem, obs, id]
+        );
+
+        if (resultado.rowCount === 0) {
+            // Nenhum remédio foi encontrado com o ID fornecido
+            return res.status(404).json({ error: 'Remédio não encontrado' });
+        }
+
+        // Retorna o remédio atualizado
+        res.json(resultado.rows[0]);
+    } catch (err) {
+        console.error('Erro ao atualizar o remédio:', err);
+        res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

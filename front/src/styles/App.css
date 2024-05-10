@@ -4,3 +4,17 @@
     width: 25px;
     height: auto;
 }
+.edit-btn{
+    width: 25px;
+    height: auto;
+}
+
+.btn{
+    color: white;
+    background-color: #46AFB2;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #46AFB2;
+}
