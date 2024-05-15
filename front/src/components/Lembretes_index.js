@@ -78,7 +78,7 @@ const Lembretes_index = () => {
                     ))}
                     </tbody>
                 </table>
-                <Link to="/remedios/new" className="btn btn-outline-dark mb-3">Adicionar Lembrete</Link>
+                <Link to="/lembretes/new" className="btn btn-outline-dark mb-3">Adicionar Lembrete</Link>
 
             </div>
         </div>
