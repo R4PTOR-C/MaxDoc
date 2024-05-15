@@ -43,13 +43,13 @@ function Navbar() {
 
                 {/* Itens de navegação no lado direito */}
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ms-auto"> {/* ms-auto empurra os itens para a direita */}
-                        <li className="nav-item dropdown">
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item dropdown mx-auto" style={{padding: '10px'}}>
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                aria-expanded="false">
                                 Medicamentos
                             </a>
-                            <ul className="dropdown-menu">
+                            <ul className="dropdown-menu ">
                                 <li><a className="dropdown-item" href="/remedios">Estoque</a></li>
                                 <li><a className="dropdown-item" href="/remedios/new">Adicionar remédio</a></li>
                             </ul>
@@ -64,8 +64,8 @@ function Navbar() {
                                 <li><a className="dropdown-item" href="#">Criar Lembrete</a></li>
                             </ul>
                         </li>
-                        <img src="./usuario.png" alt="Descrição da Imagem" className="logo-image-nav"/>
                     </ul>
+                    <img src="./usuario.png" alt="Descrição da Imagem" className="logo-image-nav"/>
                 </div>
             </div>
         </nav>
