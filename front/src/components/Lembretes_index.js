@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const Remedios_index = () => {
-    const [remedios, setRemedios] = useState([]);
+const Lembretes_index = () => {
+    const [lembretes, setLembretes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         setLoading(true);
         //maxdoc.onrender.com
-        fetch(`${process.env.REACT_APP_API_URL}/remedios`)
+        fetch(`${process.env.REACT_APP_API_URL}/lembretes`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro na resposta do servidor');
@@ -18,7 +18,7 @@ const Remedios_index = () => {
                 return response.json();
             })
             .then(data => {
-                setRemedios(data);
+                setLembretes(data);
                 setLoading(false);
             })
             .catch(error => {
@@ -28,8 +28,8 @@ const Remedios_index = () => {
             });
     }, []);
 
-    const deleteRemedio = (id) => {
-        fetch(`${process.env.REACT_APP_API_URL}/remedios/${id}`, {
+    const deleteLembrete = (id) => {
+        fetch(`${process.env.REACT_APP_API_URL}/lembretes/${id}`, {
             method: 'DELETE',
         })
             .then(response => {
@@ -37,10 +37,10 @@ const Remedios_index = () => {
                     throw new Error('Falha ao deletar o remedio');
                 }
                 // Filtra o usuário deletado fora do estado de usuários
-                setRemedios(remedios.filter(user => user.id !== id));
+                setLembretes(lembretes.filter(user => user.id !== id));
             })
             .catch(error => {
-                console.error("Erro ao deletar o usuário:", error);
+                console.error("Erro ao deletar o lembrete:", error);
                 alert(error.message);
             });
     };
@@ -51,41 +51,34 @@ const Remedios_index = () => {
     return (
 
         <div className="overflow-auto">
-            <h1 className="text-2xl font-bold mb-4">Remedios</h1>
+            <h1 className="text-2xl font-bold mb-4">Lembretes</h1>
             <div className="table-responsive">
                 <table className="table table-hover">
                     <thead className="bg-gray-200">
                     <tr>
                         <th scope="col" className="px-6 py-3">ID</th>
-                        <th scope="col" className="px-6 py-3">Nome</th>
-                        <th scope="col" className="px-6 py-3">Categoria</th>
-                        <th scope="col" className="px-6 py-3">Formulação</th>
-                        <th scope="col" className="px-6 py-3">Dosagem</th>
-                        <th scope="col" className="px-6 py-3">Observação</th>
-                        <th scope="col" className="px-6 py-3">Ações</th>
+                        <th scope="col" className="px-6 py-3">Descrição</th>
+                        <th scope="col" className="px-6 py-3">Data</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {remedios.map(remedio => (
-                        <tr key={remedio.id}>
-                            <th scope="row" className="px-6 py-4">{remedio.id}</th>
-                            <td className="px-6 py-4">{remedio.nome}</td>
-                            <td className="px-6 py-4">{remedio.categoria}</td>
-                            <td className="px-6 py-4">{remedio.formulacao}</td>
-                            <td className="px-6 py-4">{remedio.dosagem}</td>
-                            <td className="px-6 py-4">{remedio.obs}</td>
+                    {lembretes.map(lembrete => (
+                        <tr key={lembrete.id}>
+                            <th scope="row" className="px-6 py-4">{lembrete.id}</th>
+                            <td className="px-6 py-4">{lembrete.descricao}</td>
+                            <td className="px-6 py-4">{lembrete.data}</td>
                             <td className="px-6 py-4">
-                                <Link to={`/remedios/edit/${remedio.id}`}>
+                                <Link to={`/remedios/edit/${lembrete.id}`}>
                                     <img src='./edit.png' alt="Ícone de editar" className="edit-btn" />
                                 </Link>
                                 <img src='./delete.png' alt="Ícone de delete" className="delete-btn"
-                                     onClick={() => deleteRemedio(remedio.id)}/>
+                                     onClick={() => deleteLembrete(lembrete.id)}/>
                             </td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
-                <Link to="/remedios/new" className="btn btn-outline-dark mb-3">Adicionar Remedio</Link>
+                <Link to="/lembretes/new" className="btn btn-outline-dark mb-3">Adicionar Lembrete</Link>
 
             </div>
         </div>
@@ -93,4 +86,4 @@ const Remedios_index = () => {
 }
 
 
-export default Remedios_index;
+export default Lembretes_index;

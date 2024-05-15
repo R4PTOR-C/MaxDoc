@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
@@ -8,40 +8,68 @@ function Navbar() {
         setIsActive(!isActive);
     };
 
+    const hamburgerRef = useRef(null);
+
+    useEffect(() => {
+        const hamburger = hamburgerRef.current;
+        if (hamburger) {
+            const toggleClass = () => {
+                hamburger.classList.toggle('active');
+            };
+            hamburger.addEventListener('click', toggleClass);
+
+            // Limpeza do evento
+            return () => {
+                hamburger.removeEventListener('click', toggleClass);
+            };
+        }
+    }, []);
+
+
     return (
-        <header className="navBar">
-            <nav className={`nav ${isActive ? 'active' : ''}`}>
-                <Link to="/home" style={{textDecoration: 'none'}}>
-                <div  className="logo">
-                    <h1 className="logoTxt">MAX</h1>
-                    <img className="logoimg" src="/maxdoc-logo.png" width="40" height="auto" alt="MaxDoc Logo" />
-                    <h1 className="logoTxt">DOC</h1>
+        <nav className="navbar navbar-expand-lg" style={{backgroundColor: '#b82f27'}}>
+            <div className="container-fluid">
+                <a href="/home" style={{textDecoration: 'none'}}>
+                <div className="flex-container">
+                    <h1 className="logo-text-nav">MAX</h1>
+                    <img className="logo-image-nav" src='./maxdoc-logo.png' alt="Logo Descrição"/>
+                    <h1 className="logo-text-nav">DOC</h1>
                 </div>
-                </Link>
-                <button className="hamburger" onClick={toggleMenu}></button>
-                <ul className="navList">
-                    <li>
-                        <button className="botao">Medicamentos<i className='bx bx-down-arrow'></i></button>
-                        <div className="submenu1">
-                            <ul>
-                                <li><Link to="/remedios">Estoque</Link></li>
-                                <li><Link to="/remedios/new">Adicionar remédio</Link></li>
+                </a>
+                <button ref={hamburgerRef} className="hamburger" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                </button>
+
+                {/* Itens de navegação no lado direito */}
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item dropdown mx-auto">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Medicamentos
+                            </a>
+                            <ul className="dropdown-menu ">
+                                <li><a className="dropdown-item" href="/remedios">Estoque</a></li>
+                                <li><a className="dropdown-item" href="/remedios/new">Adicionar remédio</a></li>
                             </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <button className="botao">Lembretes<i className='bx bx-down-arrow'></i></button>
-                        <div className="submenu1">
-                            <ul>
-                                <li><Link to="/chegar-lembretes">Chegar Lembretes</Link></li>
-                                <li><Link to="/criar-lembrete">Criar lembrete</Link></li>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Lembretes
+                            </a>
+                            <ul className="dropdown-menu">
+                                <li><a className="dropdown-item" href="/lembretes">Checar Lembretes</a></li>
+                                <li><a className="dropdown-item" href="/lembretes/new">Criar Lembrete</a></li>
                             </ul>
-                        </div>
-                    </li>
-                    <li><Link to="/perfil"><img src="/usuario.png" alt="Foto do usuário" width="40" height="auto" /></Link></li>
-                </ul>
-            </nav>
-        </header>
+                        </li>
+                    </ul>
+                    <img src="./usuario.png" alt="Descrição da Imagem" className="logo-image-nav"/>
+                </div>
+            </div>
+        </nav>
+
     );
 }
 
