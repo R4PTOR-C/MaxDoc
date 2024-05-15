@@ -11,6 +11,8 @@ import Navbar from "./components/navbar";
 import Remedios_index from "./components/Remedios_index";
 import Remedios_new from "./components/Remedios_new";
 import EditRemedio from "./components/Remedios_edit"; // Supondo que você tenha o componente de edição
+import Lembretes_index from "./components/Lembretes_index";
+import Lembretes_new from "./components/Lembretes_new";
 
 function Layout() {
     return (
@@ -33,6 +35,8 @@ function App() {
                     <Route path="/remedios" element={<Remedios_index />} />
                     <Route path="/remedios/new" element={<Remedios_new />} />
                     <Route path="/remedios/edit/:id" element={<EditRemedio />} /> {/* Rota para editar remédios */}
+                    <Route path="/lembretes" element={<Lembretes_index />} />
+                    <Route path="/lembretes/new" element={<Lembretes_new />} />
                 </Route>
             </Routes>
         </Router>

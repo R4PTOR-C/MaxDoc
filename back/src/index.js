@@ -95,6 +95,8 @@ app.post('/', async (req, res) => {
     }
 });
 
+/***************************************************remedios**********************************************************/
+
 app.get('/remedios', async (req, res) => {
     try {
         const { rows } = await db.query('SELECT * FROM remedios');
@@ -182,6 +184,68 @@ app.put('/remedios/:id', async (req, res) => {
     } catch (err) {
         console.error('Erro ao atualizar o remédio:', err);
         res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+});
+
+/***************************************************lembretes**********************************************************/
+
+app.get('/lembretes', async (req, res) => {
+    try {
+        const { rows } = await db.query('SELECT * FROM lembretes');
+        console.log(rows); // Imprime os dados na console do servidor
+        res.json(rows); // Envia os dados como JSON para o cliente
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: 'Internal server error'});
+    }
+});
+
+// Rota para criar um novo lembrete
+app.post('/lembretes', async (req, res) => {
+    const { remedio_id, descricao, data } = req.body;
+    try {
+        const resultado = await db.query(
+            'INSERT INTO lembretes (remedio_id, descricao, data) VALUES ($1, $2, $3) RETURNING *',
+            [remedio_id, descricao, data]
+        );
+        res.status(201).json(resultado.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Rota para atualizar um lembrete
+app.put('/lembretes/:id', async (req, res) => {
+    const { id } = req.params;
+    const { remedio_id, descricao, data } = req.body;
+    try {
+        const resultado = await db.query(
+            'UPDATE lembretes SET remedio_id = $1, descricao = $2, data = $3 WHERE id = $4 RETURNING *',
+            [remedio_id, descricao, data, id]
+        );
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({ error: 'Lembrete não encontrado' });
+        }
+        res.json(resultado.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Rota para deletar um lembrete
+app.delete('/lembretes/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const resultado = await db.query('DELETE FROM lembretes WHERE id = $1 RETURNING *', [id]);
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({ error: 'Lembrete não encontrado' });
+        }
+        res.json(resultado.rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
 
