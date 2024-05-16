@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import logoImage from '../imagens/maxdoc-logo.png';
+import userImage from '../imagens/usuario.png';
 
 function Navbar() {
     const [isActive, setIsActive] = useState(false);
@@ -31,7 +33,7 @@ function Navbar() {
                 <Link to="/home" style={{ textDecoration: 'none' }}>
                     <div className="flex-container">
                         <h1 className="logo-text-nav">MAX</h1>
-                        <img className="logo-image-nav" src='./maxdoc-logo.png' alt="Logo Descrição" />
+                        <img className="logo-image-nav" src={logoImage} alt="Logo Descrição" />
                         <h1 className="logo-text-nav">DOC</h1>
                     </div>
                 </Link>
@@ -70,7 +72,7 @@ function Navbar() {
                             </ul>
                         </li>
                     </ul>
-                    <img src="./usuario.png" alt="Descrição da Imagem" className="logo-image-nav" />
+                    <img src={userImage} alt="Descrição da Imagem" className="logo-image-nav" />
                 </div>
             </div>
         </nav>

@@ -26,6 +26,10 @@
     transition: background-color 0.3s;
 }
 
+.fc-daygrid-day-top{
+    background-color: #b82f27;
+}
+
 .day-button:hover {
     background-color: #f0f0f0;
 }
@@ -36,13 +40,13 @@
 
 .fc-event{
     color: #b82f27 !important;
+    border-color: #b82f27 !important;     /* Cor da borda */
+
 }
 
-.event-dot {
-    color: #b82f27 !important;
+.fc-event-main{
+    background-color: #b82f27 !important;
 }
-
-
 
 .fc-daygrid-event-dot {
     background-color: #b82f27 !important; /* Cor do ponto */
