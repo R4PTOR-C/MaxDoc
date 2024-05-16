@@ -17,7 +17,7 @@
 
 /* Alterar a cor dos números dos dias para preto */
 .fc-daygrid-day-number {
-    color: black !important;
+    color: white !important;
 }
 
 /* Estilizar os dias do calendário como botões */
@@ -32,4 +32,16 @@
 
 .fc-col-header-cell-cushion{
     color: #b82f27 !important;
+}
+
+.fc-event{
+    color: #b82f27 !important;
+}
+
+.event-dot {
+    color: #b82f27 !important;
+}
+
+.fc-daygrid-day-top{
+    background-color: #b82f27;
 }
