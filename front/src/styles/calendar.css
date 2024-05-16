@@ -3,12 +3,12 @@
 /* Mudar a cor das setas de navegação */
 .fc-button {
     color: #fff !important;
-    background-color: #b82f27 !important;
+    background-color: #46AFB2 !important;
     border: none !important;
 }
 
 .fc-button:hover {
-    background-color: #6E1C17 !important;
+    background-color: #46AFB2 !important;
 }
 
 .fc-button:focus {
@@ -27,7 +27,7 @@
 }
 
 .fc-daygrid-day-top{
-    background-color: #b82f27;
+    background-color: #46AFB2;
 }
 
 .day-button:hover {
@@ -35,11 +35,11 @@
 }
 
 .fc-col-header-cell-cushion{
-    color: #b82f27 !important;
+    color: black !important;
 }
 
 .fc-event{
-    color: #b82f27 !important;
+    color: black !important;
     border-color: #b82f27 !important;     /* Cor da borda */
 
 }
@@ -50,5 +50,5 @@
 
 .fc-daygrid-event-dot {
     background-color: #b82f27 !important; /* Cor do ponto */
-    border-color: #b82f27 !important;     /* Cor da borda */
+    border-color: black !important;     /* Cor da borda */
 }

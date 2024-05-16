@@ -53,11 +53,11 @@ function Navbar() {
 
                 <div className={`collapse navbar-collapse ${isActive ? 'show' : ''}`} id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto">
-                        <li className="nav-item dropdown mx-auto">
+                        <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Medicamentos
                             </a>
-                            <ul className="dropdown-menu">
+                            <ul className=" dropdown-menu">
                                 <li><Link className="dropdown-item" to="/remedios">Estoque</Link></li>
                                 <li><Link className="dropdown-item" to="/remedios/new">Adicionar remédio</Link></li>
                             </ul>
