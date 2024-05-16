@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/App.css';
 import './styles/login.css';
 import './styles/navbar.css';
+import './styles/calendar.css';
 import Usuarios_index from './components/Usuarios_index';
 import Login from './components/login';
 import Usuarios_new from "./components/Usuarios_new";

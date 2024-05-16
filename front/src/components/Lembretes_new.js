@@ -3,6 +3,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/calendar.css'; // Import custom CSS
 
 function Lembretes_new() {
     const [descricao, setDescricao] = useState('');
@@ -54,6 +55,12 @@ function Lembretes_new() {
                 initialView="dayGridMonth"
                 dateClick={handleDateClick}
                 weekends={true}
+                dayCellClassNames='day-button'
+                headerToolbar={{
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,dayGridWeek,dayGridDay'
+                }}
             />
 
             {/* Modal */}

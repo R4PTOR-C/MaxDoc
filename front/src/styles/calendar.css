@@ -1,0 +1,35 @@
+/* custom.css */
+
+/* Mudar a cor das setas de navegação */
+.fc-button {
+    color: #fff !important;
+    background-color: #b82f27 !important;
+    border: none !important;
+}
+
+.fc-button:hover {
+    background-color: #6E1C17 !important;
+}
+
+.fc-button:focus {
+    box-shadow: none !important;
+}
+
+/* Alterar a cor dos números dos dias para preto */
+.fc-daygrid-day-number {
+    color: black !important;
+}
+
+/* Estilizar os dias do calendário como botões */
+.day-button {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.day-button:hover {
+    background-color: #f0f0f0;
+}
+
+.fc-col-header-cell-cushion{
+    color: #b82f27 !important;
+}
