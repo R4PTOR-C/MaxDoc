@@ -42,6 +42,9 @@
     color: #b82f27 !important;
 }
 
-.fc-daygrid-day-top{
-    background-color: #b82f27;
+
+
+.fc-daygrid-event-dot {
+    background-color: #b82f27 !important; /* Cor do ponto */
+    border-color: #b82f27 !important;     /* Cor da borda */
 }
