@@ -25,51 +25,55 @@ function Navbar() {
         }
     }, []);
 
-
     return (
-        <nav className="navbar navbar-expand-lg" style={{backgroundColor: '#b82f27'}}>
+        <nav className="navbar navbar-expand-lg" style={{ backgroundColor: '#b82f27' }}>
             <div className="container-fluid">
-                <a href="/home" style={{textDecoration: 'none'}}>
-                <div className="flex-container">
-                    <h1 className="logo-text-nav">MAX</h1>
-                    <img className="logo-image-nav" src='./maxdoc-logo.png' alt="Logo Descrição"/>
-                    <h1 className="logo-text-nav">DOC</h1>
-                </div>
-                </a>
-                <button ref={hamburgerRef} className="hamburger" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <Link to="/home" style={{ textDecoration: 'none' }}>
+                    <div className="flex-container">
+                        <h1 className="logo-text-nav">MAX</h1>
+                        <img className="logo-image-nav" src='./maxdoc-logo.png' alt="Logo Descrição" />
+                        <h1 className="logo-text-nav">DOC</h1>
+                    </div>
+                </Link>
+                <button
+                    ref={hamburgerRef}
+                    className={`navbar-toggler ${isActive ? 'active' : ''}`}
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded={isActive}
+                    aria-label="Toggle navigation"
+                    onClick={toggleMenu}
+                >
+                    <span className="navbar-toggler-icon"></span>
                 </button>
 
-                {/* Itens de navegação no lado direito */}
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <div className={`collapse navbar-collapse ${isActive ? 'show' : ''}`} id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item dropdown mx-auto">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Medicamentos
                             </a>
-                            <ul className="dropdown-menu ">
-                                <li><a className="dropdown-item" href="/remedios">Estoque</a></li>
-                                <li><a className="dropdown-item" href="/remedios/new">Adicionar remédio</a></li>
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to="/remedios">Estoque</Link></li>
+                                <li><Link className="dropdown-item" to="/remedios/new">Adicionar remédio</Link></li>
                             </ul>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Lembretes
                             </a>
                             <ul className="dropdown-menu">
-                                <li><a className="dropdown-item" href="/lembretes">Checar Lembretes</a></li>
-                                <li><a className="dropdown-item" href="/lembretes/new">Criar Lembrete</a></li>
+                                <li><Link className="dropdown-item" to="/lembretes">Checar Lembretes</Link></li>
+                                <li><Link className="dropdown-item" to="/lembretes/new">Criar Lembrete</Link></li>
                             </ul>
                         </li>
                     </ul>
-                    <img src="./usuario.png" alt="Descrição da Imagem" className="logo-image-nav"/>
+                    <img src="./usuario.png" alt="Descrição da Imagem" className="logo-image-nav" />
                 </div>
             </div>
         </nav>
-
     );
 }
 
