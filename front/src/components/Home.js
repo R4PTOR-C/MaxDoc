@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import ptBrLocale from '@fullcalendar/core/locales/pt-br'; // Importe o pacote de localização em português
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Home = () => {
@@ -43,6 +44,7 @@ const Home = () => {
                     <FullCalendar
                         plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
+                        locale={ptBrLocale} // Configura o idioma para português
                         dateClick={handleDateClick}
                         events={lembretes.map(lembrete => ({
                             title: lembrete.descricao,
