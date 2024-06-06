@@ -1,138 +1,163 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const EditRemedio = () => {
-    const { id } = useParams(); // Extrai o ID da URL
-    const navigate = useNavigate(); // Navegação programática
+function RemediosEdit() {
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [remedio, setRemedio] = useState({
         nome: '',
         categoria: '',
         formulacao: '',
         dosagem: '',
         obs: '',
+        dias_semana: [],
+        horario: ''
     });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+
+    const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
     useEffect(() => {
-        const fetchData = async () => {
+        async function fetchRemedio() {
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_URL}/remedios/${id}`);
                 if (!response.ok) {
-                    throw new Error('Erro ao buscar o remédio');
+                    throw new Error('Falha ao carregar o remédio');
                 }
                 const data = await response.json();
                 setRemedio(data);
             } catch (error) {
-                console.error('Erro ao buscar os dados:', error);
-                setError(error.toString());
+                console.error(error);
             }
-        };
+        }
 
-        fetchData();
-    }, [id]); // Não esqueça de incluir `id` nas dependências, se for dinâmico
+        fetchRemedio();
+    }, [id]);
 
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setRemedio({ ...remedio, [name]: value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetch(`${process.env.REACT_APP_API_URL}/remedios/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(remedio),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao atualizar o remédio');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Atualização bem-sucedida:', data);
-                navigate('/remedios'); // Redireciona de volta à lista de remédios
-            })
-            .catch(error => {
-                console.error('Erro ao atualizar o remédio:', error);
-                alert(error.message);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/remedios/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(remedio)
             });
+            if (!response.ok) {
+                throw new Error('Falha ao editar o remédio');
+            }
+            navigate('/remedios');
+        } catch (error) {
+            console.error(error);
+        }
     };
 
-    if (loading) return <div>Carregando...</div>;
-    if (error) return <div>Erro: {error}</div>;
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setRemedio(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleCheckboxChange = (dia) => {
+        setRemedio(prevState => ({
+            ...prevState,
+            dias_semana: prevState.dias_semana.includes(dia)
+                ? prevState.dias_semana.filter(d => d !== dia)
+                : [...prevState.dias_semana, dia]
+        }));
+    };
 
     return (
         <div className="container mt-5">
-            <h1 className="mb-4">Editar Remédio</h1>
-            {error && <div className="alert alert-danger">{error}</div>}
+            <h2>Editar Remédio</h2>
             <form onSubmit={handleSubmit}>
-                <div className="form-group mb-3">
-                    <label htmlFor="nome" className="form-label">Nome</label>
+                <div className="form-group">
+                    <label>Nome</label>
                     <input
                         type="text"
-                        id="nome"
-                        name="nome"
                         className="form-control"
+                        name="nome"
                         value={remedio.nome}
                         onChange={handleChange}
                         required
                     />
                 </div>
-                <div className="form-group mb-3">
-                    <label htmlFor="categoria" className="form-label">Categoria</label>
+                <div className="form-group">
+                    <label>Categoria</label>
                     <input
                         type="text"
-                        id="categoria"
-                        name="categoria"
                         className="form-control"
+                        name="categoria"
                         value={remedio.categoria}
                         onChange={handleChange}
                         required
                     />
                 </div>
-                <div className="form-group mb-3">
-                    <label htmlFor="formulacao" className="form-label">Formulação</label>
+                <div className="form-group">
+                    <label>Formulação</label>
                     <input
                         type="text"
-                        id="formulacao"
-                        name="formulacao"
                         className="form-control"
+                        name="formulacao"
                         value={remedio.formulacao}
                         onChange={handleChange}
+                        required
                     />
                 </div>
-                <div className="form-group mb-3">
-                    <label htmlFor="dosagem" className="form-label">Dosagem</label>
+                <div className="form-group">
+                    <label>Dosagem</label>
                     <input
                         type="text"
-                        id="dosagem"
-                        name="dosagem"
                         className="form-control"
+                        name="dosagem"
                         value={remedio.dosagem}
                         onChange={handleChange}
+                        required
                     />
                 </div>
-                <div className="form-group mb-3">
-                    <label htmlFor="obs" className="form-label">Observação</label>
+                <div className="form-group">
+                    <label>Observações</label>
                     <textarea
-                        id="obs"
-                        name="obs"
                         className="form-control"
-                        rows="4"
+                        name="obs"
                         value={remedio.obs}
                         onChange={handleChange}
                     />
                 </div>
-                <button type="submit" className="btn ">Salvar</button>
+                <div className="form-group">
+                    <label>Dias da Semana</label>
+                    {dias.map(dia => (
+                        <div key={dia} className="form-check">
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                                id={dia}
+                                value={dia}
+                                checked={remedio.dias_semana.includes(dia)}
+                                onChange={() => handleCheckboxChange(dia)}
+                            />
+                            <label className="form-check-label" htmlFor={dia}>{dia}</label>
+                        </div>
+                    ))}
+                </div>
+                <div className="form-group">
+                    <label>Horário</label>
+                    <input
+                        type="time"
+                        className="form-control"
+                        name="horario"
+                        value={remedio.horario}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <button type="submit" className="btn btn-primary">Salvar Alterações</button>
             </form>
         </div>
-
     );
-};
+}
 
-export default EditRemedio;
+export default RemediosEdit;

@@ -40,12 +40,12 @@
 
 .fc-event{
     color: black !important;
-    border-color: #b82f27 !important;     /* Cor da borda */
+    border-color: #007A7D !important;     /* Cor da borda */
 
 }
 
 .fc-event-main{
-    background-color: #b82f27 !important;
+    background-color: #007A7D !important;
 }
 
 .fc-daygrid-event-dot {

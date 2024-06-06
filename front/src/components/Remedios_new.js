@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Remedios_new() {
     const [nome, setNome] = useState('');
@@ -6,11 +7,22 @@ function Remedios_new() {
     const [formulacao, setFormulacao] = useState('');
     const [dosagem, setDosagem] = useState('');
     const [obs, setObs] = useState('');
+    const [diasSemana, setDiasSemana] = useState([]);
+    const [horario, setHorario] = useState('');
 
+    const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
+    const handleCheckboxChange = (dia) => {
+        setDiasSemana(prevState =>
+            prevState.includes(dia)
+                ? prevState.filter(d => d !== dia)
+                : [...prevState, dia]
+        );
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const remedio = { nome, categoria, formulacao, dosagem, obs };
+        const remedio = { nome, categoria, formulacao, dosagem, obs, dias_semana: diasSemana, horario };
 
         try {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/remedios`, {
@@ -22,10 +34,10 @@ function Remedios_new() {
             });
 
             if (response.ok) {
-                alert('Remedio adicionado com sucesso!');
+                alert('Remédio adicionado com sucesso!');
                 // Resetar o formulário ou redirecionar o usuário
             } else {
-                alert('Falha ao adicionar remedio.');
+                alert('Falha ao adicionar remédio.');
             }
         } catch (error) {
             console.error('Erro:', error);
@@ -35,7 +47,7 @@ function Remedios_new() {
 
     return (
         <div className="container mt-5">
-            <h2>Adicionar Novo Remedio</h2>
+            <h2>Adicionar Novo Remédio</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Nome</label>
@@ -78,12 +90,36 @@ function Remedios_new() {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Observação</label>
-                    <input
-                        type="text"
+                    <label>Observações</label>
+                    <textarea
                         className="form-control"
                         value={obs}
                         onChange={(e) => setObs(e.target.value)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Dias da Semana</label>
+                    {dias.map(dia => (
+                        <div key={dia} className="form-check">
+                            <input
+                                type="checkbox"
+                                className="form-check-input"
+                                id={dia}
+                                value={dia}
+                                checked={diasSemana.includes(dia)}
+                                onChange={() => handleCheckboxChange(dia)}
+                            />
+                            <label className="form-check-label" htmlFor={dia}>{dia}</label>
+                        </div>
+                    ))}
+                </div>
+                <div className="form-group">
+                    <label>Horário</label>
+                    <input
+                        type="time"
+                        className="form-control"
+                        value={horario}
+                        onChange={(e) => setHorario(e.target.value)}
                         required
                     />
                 </div>

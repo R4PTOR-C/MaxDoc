@@ -109,12 +109,11 @@ app.get('/remedios', async (req, res) => {
 });
 
 app.post('/remedios', async (req, res) => {
-    const { nome, categoria, formulacao, dosagem, obs } = req.body;
-
+    const { nome, categoria, formulacao, dosagem, obs, dias_semana, horario } = req.body;
     try {
         const resultado = await db.query(
-            'INSERT INTO remedios (nome, categoria, formulacao, dosagem, obs) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-            [nome, categoria, formulacao, dosagem, obs]
+            'INSERT INTO remedios (nome, categoria, formulacao, dosagem, obs, dias_semana, horario) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+            [nome, categoria, formulacao, dosagem, obs, dias_semana, horario]
         );
         res.status(201).json(resultado.rows[0]);
     } catch (err) {
@@ -145,12 +144,13 @@ app.delete('/remedios/:id', async (req, res) => {
     }
 });
 
+// Rota para obter um remédio específico
 app.get('/remedios/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const { rows } = await db.query('SELECT * FROM remedios WHERE id = $1', [id]);
         if (rows.length === 0) {
-            return res.status(404).send('Remédio não encontrado');
+            return res.status(404).json({ error: 'Remédio não encontrado' });
         }
         res.json(rows[0]);
     } catch (err) {
@@ -159,34 +159,24 @@ app.get('/remedios/:id', async (req, res) => {
     }
 });
 
-
+// Rota para atualizar um remédio
 app.put('/remedios/:id', async (req, res) => {
-    const { id } = req.params; // Extrai o ID do remédio da URL
-    const { nome, categoria, formulacao, dosagem, obs } = req.body; // Dados que serão atualizados
-
+    const { id } = req.params;
+    const { nome, categoria, formulacao, dosagem, obs, dias_semana, horario } = req.body;
     try {
-        // Query de atualização com a cláusula WHERE para encontrar o registro correto
         const resultado = await db.query(
-            `UPDATE remedios
-             SET nome = $1, categoria = $2, formulacao = $3, dosagem = $4, obs = $5
-             WHERE id = $6
-             RETURNING *`, // Retorna os dados atualizados
-            [nome, categoria, formulacao, dosagem, obs, id]
+            'UPDATE remedios SET nome = $1, categoria = $2, formulacao = $3, dosagem = $4, obs = $5, dias_semana = $6, horario = $7 WHERE id = $8 RETURNING *',
+            [nome, categoria, formulacao, dosagem, obs, dias_semana, horario, id]
         );
-
-        if (resultado.rowCount === 0) {
-            // Nenhum remédio foi encontrado com o ID fornecido
+        if (resultado.rows.length === 0) {
             return res.status(404).json({ error: 'Remédio não encontrado' });
         }
-
-        // Retorna o remédio atualizado
         res.json(resultado.rows[0]);
     } catch (err) {
-        console.error('Erro ao atualizar o remédio:', err);
-        res.status(500).json({ error: 'Erro interno do servidor' });
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
     }
 });
-
 /***************************************************lembretes**********************************************************/
 
 app.get('/lembretes', async (req, res) => {

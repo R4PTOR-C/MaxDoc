@@ -18,3 +18,22 @@
 .btn:hover{
     background-color: #b82f27;
 }
+
+.lembrete {
+    max-width: 600px;
+    text-align: center;
+    border-bottom: 1px solid #b82f27;
+
+}
+
+.lembrete h2 {
+    margin-bottom: 3%;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #b82f27;
+
+}
+.lembrete p {
+    padding: 2% 0;
+    font-family: sans-serif;
+
+}
