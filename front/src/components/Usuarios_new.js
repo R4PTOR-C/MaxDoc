@@ -59,14 +59,18 @@ function Usuarios_new() {
                 </div>
                 <div className="form-group">
                     <label>Gênero</label>
-                    <input
-                        type="text"
+                    <select
                         className="form-control"
                         value={genero}
                         onChange={(e) => setGenero(e.target.value)}
                         required
-                    />
+                    >
+                        <option value="" disabled>Selecione o gênero</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                    </select>
                 </div>
+
                 <div className="form-group">
                     <label>Email</label>
                     <input
